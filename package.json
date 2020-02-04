@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/aboulmagdApp/nodeApp/issues"
   },
-  "homepage": "https://github.com/aboulmagdApp/nodeApp#readme"
+  "homepage": "https://github.com/aboulmagdApp/nodeApp#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
 }
