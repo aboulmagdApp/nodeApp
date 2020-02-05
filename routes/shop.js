@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 const rootDir = require('../util/path')
-// sharing data accross requests
+// sharing data across requests
 const adminData = require('./admin');
 
 const router = express.Router();
