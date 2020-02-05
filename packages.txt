@@ -1,3 +1,4 @@
 - npm install nodemon --save-dev
 - npm install nodemon -g
 - npm install --save express    // install as production dependencies
+- npm install --save body-parser   // install for parse incoming request
