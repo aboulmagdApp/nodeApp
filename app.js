@@ -7,8 +7,8 @@ const path = require('path');
 //create application express
 const app = express();
 
-// for use pug engine
-app.set('view engine', 'pug');
+// for use ejs engine
+app.set('view engine', 'ejs');
 // for tell engine where then view will store in app
 app.set('views', 'views');
 
