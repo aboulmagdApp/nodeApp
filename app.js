@@ -7,6 +7,11 @@ const path = require('path');
 //create application express
 const app = express();
 
+// for use pug engine
+app.set('view engine', 'pug');
+// for tell engine where then view will store in app
+app.set('views', 'views');
+
 //declare all app routes
 const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
@@ -21,7 +26,8 @@ app.use(shopRoutes);
 
 // handel error page in app
 app.use('/',(req, res, next) =>{
-    res.status(404).sendFile(path.join(__dirname,'views','404.html'));
+    //res.status(404).sendFile(path.join(__dirname,'views','404.html'));
+    res.status(404).render('404');
 });
 
 app.listen(3000);

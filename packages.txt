@@ -2,3 +2,4 @@
 - npm install nodemon -g
 - npm install --save express    // install as production dependencies
 - npm install --save body-parser   // install for parse incoming request
+- npm install --save es pug express-handlebars  // install html template engines
