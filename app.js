@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 //declare all app routes
-const adminData = require('./routes/admin');
+const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 // use bodyParser for parse incoming request
@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')))
 
 // use all routes in app
-app.use('/admin', adminData.routes);
+app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
 // handel error page in app
