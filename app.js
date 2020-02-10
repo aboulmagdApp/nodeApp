@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 // inport path to return application path for static file like css, html...etc
 const path = require('path');
 
+const errorController = require('./controllers/error');
+
 //create application express
 const app = express();
 
@@ -25,12 +27,6 @@ app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
 // handel error page in app
-app.use('/',(req, res, next) =>{
-    //res.status(404).sendFile(path.join(__dirname,'views','404.html'));
-    res.status(404).render('404',{
-        pageTitle: 'Page Not Found',
-        path : ''
-    });
-});
+app.use(errorController.get404);
 
 app.listen(3000);
