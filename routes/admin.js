@@ -6,8 +6,6 @@ const productsController = require('../controllers/products');
 
 const router = express.Router();
 
-// create object array to hold all products
-const products = [];
 // /admin/add-product  => GET
 router.get('/add-product', productsController.getAddProduct);
 
