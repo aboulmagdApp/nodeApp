@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 // inport path to return application path for static file like css, html...etc
 const path = require('path');
 
+// working with login in error controller
 const errorController = require('./controllers/error');
 
 //create application express
