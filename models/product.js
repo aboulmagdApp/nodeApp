@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const rootDir = require('../util/path')
+const rootDir = require('../util/path');
 
 const p = path.join(rootDir,
     'data',
