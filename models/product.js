@@ -38,7 +38,10 @@ module.exports = class Product {
           console.log(err);
         });
       } else {
-        this.id = Math.random().toString();
+                      //to create uuid-in-javascript
+        this.id = [...Array(22)].map(i=>(~~(Math.random()*36)).toString(36)).join('');
+        //Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);    
+        // Math.random().toString();
         products.push(this);
         fs.writeFile(p, JSON.stringify(products), err => {
           console.log('I am from add');
