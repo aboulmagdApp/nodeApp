@@ -6,7 +6,7 @@ const path = require('path');
 
 // working with login in error controller
 const errorController = require('./controllers/error');
-
+const db = require('./util/database');
 //create application express
 const app = express();
 
