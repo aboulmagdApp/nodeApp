@@ -6,7 +6,6 @@ const path = require('path');
 
 // working with login in error controller
 const errorController = require('./controllers/error');
-const db = require('./util/database');
 //create application express
 const app = express();
 
@@ -18,14 +17,6 @@ app.set('views', 'views');
 //declare all app routes
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
-
- db.execute('SELECT * FROM products')
- .then(result => {
-     console.log(result[0], result[1]);
- })
- .catch(err =>{
-     console.log(err);
- });
 
 // use bodyParser for parse incoming request
 app.use(bodyParser.urlencoded({extended: false}));
