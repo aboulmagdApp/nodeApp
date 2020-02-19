@@ -3,4 +3,5 @@
 - npm install --save express    // install as production dependencies
 - npm install --save body-parser   // install for parse incoming request
 - npm install --save ejs pug express-handlebars  // install html template engines
-- npm install -save mysql2   // install as production dependencies
+- npm install --save mysql2   // install as production dependencies
+- npm install --save sequelize
