@@ -6,9 +6,12 @@ const path = require('path');
 
 // working with login in error controller
 const errorController = require('./controllers/error');
+
+const sequelize = require('./util/database');
 const Product = require('./models/product');
 const User = require('./models/user');
-const sequelize = require('./util/database');
+const Cart = require('./models/cart');
+const CartItem = require('./models/cart-item');
 
 //create application express
 const app = express();
@@ -44,9 +47,14 @@ app.use(errorController.get404);
 
 Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE'});
 User.hasMany(Product);
+User.hasOne(Cart);
+Cart.belongsTo(User);
+Cart.belongsToMany(Product, {through: CartItem});
+Product.belongsToMany(Cart, {through: CartItem});
 
 sequelize
-    .sync()
+    .sync({force: true})
+    //.sync()
     .then(result => {
         return User.findByPk('6cq8kt0oi0z4qqgxehnqsz')
        
