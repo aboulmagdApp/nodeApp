@@ -32,13 +32,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')))
 
 // this middleware will run every request
-app.use((req, res, next) =>{
+app.use((req, res, next) => {
     User.findByPk('6cq8kt0oi0z4qqgxehnqsz')
-    .then(user =>{
-        req.user = user;
-        next();
-    })
-    .catch(err => console.log(err));
+        .then(user => {
+            req.user = user;
+            next();
+        })
+        .catch(err => console.log(err));
 });
 // use all routes in app
 app.use('/admin', adminRoutes);
@@ -47,33 +47,36 @@ app.use(shopRoutes);
 // handel error page in app
 app.use(errorController.get404);
 
-Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE'});
+Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
 User.hasMany(Product);
 User.hasOne(Cart);
 Cart.belongsTo(User);
-Cart.belongsToMany(Product, {through: CartItem});
-Product.belongsToMany(Cart, {through: CartItem});
+Cart.belongsToMany(Product, { through: CartItem });
+Product.belongsToMany(Cart, { through: CartItem });
 Order.belongsTo(User);
 User.hasMany(Order);
-Order.belongsToMany(Product, {through: OrderItem});
+Order.belongsToMany(Product, { through: OrderItem });
 
 sequelize
-    .sync({force: true})
-    //.sync()
+    //.sync({force: true})
+    .sync()
     .then(result => {
         return User.findByPk('6cq8kt0oi0z4qqgxehnqsz')
     })
-    .then(user =>{
-        if(!user){
-            return User.create({id: '6cq8kt0oi0z4qqgxehnqsz', name:'aboulmagd', email:'aboulmagd@live.com'})
+    .then(user => {
+        if (!user) {
+            return User.create({ id: '6cq8kt0oi0z4qqgxehnqsz', name: 'aboulmagd', email: 'aboulmagd@live.com' })
         }
         return user;
     })
-    .then(user =>{
-        return user.createCart({id: 'kjzkyf5bdbs6pqkw4o040a'})
-        
+    .then(user => {
+        if (Cart.findByPk('kjzkyf5bdbs6pqkw4o040a')) {
+            return;
+        } else {
+            return user.createCart({ id: 'kjzkyf5bdbs6pqkw4o040a' })
+        }
     })
-    .then(cart =>{
+    .then(cart => {
         app.listen(3000);
     })
     .catch(err => {
