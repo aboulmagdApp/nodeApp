@@ -17,7 +17,7 @@ app.set('views', 'views');
 
 //declare all app routes
  const adminRoutes = require('./routes/admin');
-// const shopRoutes = require('./routes/shop');
+ const shopRoutes = require('./routes/shop');
 
 // use bodyParser for parse incoming request
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 });
 // use all routes in app
  app.use('/admin', adminRoutes);
-// app.use(shopRoutes);
+ app.use(shopRoutes);
 
 // handel error page in app
 app.use(errorController.get404);
