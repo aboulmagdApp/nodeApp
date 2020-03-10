@@ -7,6 +7,8 @@ const path = require('path');
 // working with login in error controller
 const errorController = require('./controllers/error');
 const mongoConnect = require('./util/database').mongoConnect;
+const User = require('./models/user');
+
 //create application express
 const app = express();
 
@@ -25,12 +27,12 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 // this middleware will run every request
 app.use((req, res, next) => {
-    // User.findByPk('6cq8kt0oi0z4qqgxehnqsz')
-    //     .then(user => {
-    //         req.user = user;
-    //         next();
-    //     })
-    //     .catch(err => console.log(err));
+    User.findById("5e67beacf53b714b544fbdab")
+        .then(user => {
+            req.user = user;
+            next();
+        })
+        .catch(err => console.log(err));
     next();
 });
 // use all routes in app
@@ -41,5 +43,6 @@ app.use((req, res, next) => {
 app.use(errorController.get404);
 
 mongoConnect(() => {
+
     app.listen(3000);
 });
