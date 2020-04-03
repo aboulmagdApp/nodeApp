@@ -6,3 +6,4 @@
 - npm install --save mysql2   // install as production dependencies
 - npm install --save sequelize
 - npm install --save mongodb
+- npm install --save mongoose  // working with mongoose ODM
