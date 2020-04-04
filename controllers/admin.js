@@ -69,7 +69,7 @@ exports.postAddProduct = (req, res, next) => {
     price: price, 
     description: description, 
     imageUrl: imageUrl,
-    userId: req.user._id
+    userId: req.user
   });
   product
     .save()
@@ -84,7 +84,10 @@ exports.postAddProduct = (req, res, next) => {
 
 exports.getProducts = (req, res, next) => {
   Product.find()
+    // .select('title price -_id') // and we can choose which field we can show
+    // .populate('userId', 'name') // we can populate related filed in related data
     .then(products => {
+      console.log(products);
       res.render('admin/products', {
         prods: products,
         pageTitle: 'Admin Products',
