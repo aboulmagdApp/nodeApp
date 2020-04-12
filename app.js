@@ -39,12 +39,15 @@ app.use(session({
 }));
 
 app.use((req, res, next) => {
-    User.findById("5e87d25a0c7a0a2404f4f42e")
-        .then(user => {
-            req.user = user;
-            next();
-        })
-        .catch(err => console.log(err));
+    if (!req.session.user) {
+        return next();
+      }
+    User.findById(req.session.user._id)
+    .then(user => {
+      req.user = user;
+      next();
+    })
+    .catch(err => console.log(err));
 });
 
 // use all routes in app
