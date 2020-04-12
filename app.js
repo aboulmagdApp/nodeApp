@@ -1,7 +1,7 @@
 const express = require('express');
-//import core module to parse all incoming request
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const session = require('express-session');
 // inport path to return application path for static file like css, html...etc
 const path = require('path');
 
@@ -25,8 +25,12 @@ app.set('views', 'views');
 // use bodyParser for parse incoming request
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(session({
+    secret: 'my secret',
+    resave: false,
+    saveUninitialized: false
+}));
 
-//this middleware will run every request
 app.use((req, res, next) => {
     User.findById("5e87d25a0c7a0a2404f4f42e")
         .then(user => {
