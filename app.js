@@ -2,15 +2,21 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 // inport path to return application path for static file like css, html...etc
 const path = require('path');
 
-// working with login in error controller
+
 const errorController = require('./controllers/error');
 const User = require('./models/user');
 
-//create application express
+const MONGODB_URI = 'mongodb://aboulmagd:aqtkOcbhYbQD0biM@cluster0-shard-00-00-vjxvu.mongodb.net:27017,cluster0-shard-00-01-vjxvu.mongodb.net:27017,cluster0-shard-00-02-vjxvu.mongodb.net:27017/shop?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority';
+
 const app = express();
+const store = new MongoDBStore({
+    uri: MONGODB_URI,
+    collection: 'sessions'
+});
 
 // for use ejs engine
 app.set('view engine', 'ejs');
@@ -28,7 +34,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(session({
     secret: 'my secret',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: store
 }));
 
 app.use((req, res, next) => {
@@ -49,7 +56,8 @@ app.use((req, res, next) => {
 app.use(errorController.get404);
 
 mongoose
-    .connect('mongodb://aboulmagd:aqtkOcbhYbQD0biM@cluster0-shard-00-00-vjxvu.mongodb.net:27017,cluster0-shard-00-01-vjxvu.mongodb.net:27017,cluster0-shard-00-02-vjxvu.mongodb.net:27017/shop?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority'
+    .connect(
+        MONGODB_URI
     ).then(result =>{
         User.findOne().then(user =>{
             if(!user){
