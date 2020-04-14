@@ -4,6 +4,9 @@ const Product = require('../models/product');
 const ObjectId = mongodb.ObjectId;
 
 exports.getAddProduct = (req, res, next) => {
+  if(!req.session.isLoggedIn){
+    return res.redirect('/login');
+  }
   res.render('admin/edit-product', {
     pageTitle: 'add product',
     path: '/admin/add-product',
