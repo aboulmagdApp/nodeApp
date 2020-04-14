@@ -9,3 +9,4 @@
 - npm install --save mongoose  // working with mongoose ODM
 - npm install --save express-session   =====> working with session in express
 - npm install --save connect-mongodb-session
+- npm install --save bcryptjs  =======> for password encryption
